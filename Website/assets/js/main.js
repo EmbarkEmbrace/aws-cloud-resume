@@ -6,7 +6,7 @@
 
 const counter  = document.querySelector(".counter-number");
 async function updateCounter() {
-	let response = await fetch("https://2j5kg7gv4oln5sfejawrcngnli0ixusz.lambda-url.us-east-1.on.aws/");
+	let response = await fetch("https://d2shjd2qxsk42taednh2p5dnza0trpbn.lambda-url.us-east-1.on.aws/");
 	let data = await response.json();
 	counter.innerHTML = ` Portofolio Views: ${data}`;
 }
