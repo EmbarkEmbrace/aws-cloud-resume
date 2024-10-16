@@ -19,3 +19,35 @@ On the Front End we have Route53 handling DNS, and CloudFront to take care of HT
     - `main.tf`: Contains the backend infrastructure written as terraform code.
  - `src/func.py`: Contains the visitor counter code which is deployed on lambda function.
 
+<h2>Variables:</h2>
+- The primary variables needed to get this architecture spun-up are:
+
+```
+variable "s3_bucket_name" {
+  description = "Primary Bucket name"
+  default     = N/A
+  type        = string
+}
+
+variable "domain" {
+  description = "website domain. Used with CORS to access lambda function url."
+  default     = N/A
+  type        = string
+}
+
+variable "hosted_zone_id" {
+  description = "Previously created Hosted Zone ID within Route 53."
+  default     = N/A
+  type        = string
+}
+
+variable "cert_arn" {
+  description = "Cert arn via Certificate Manager"
+  default     = N/A
+  type        = string
+}
+```
+
+- You'll also need to place the respective Lambda Function URL within your Javascript code, once generated. outputs.tf should populate this for you on a terraform apply. Additionally, place you website into your S3 bucket once generated.
+- Ensure that your "default_root_object = "index.html" is set properly, as well as "handler = "func.lambda_handler"
+- Configure AWS credentials via TF, or through your CLI.
