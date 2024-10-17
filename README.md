@@ -24,19 +24,19 @@ The primary variables needed to get this architecture spun-up are:
 
 ```
 variable "s3_bucket_name" {
-  description = "Primary Bucket name"
+  description = "primary Bucket name"
   default     = N/A
   type        = string
 }
 
 variable "domain" {
-  description = "website domain. Used with CORS to access lambda function url."
+  description = "website domain. Used with CORS on line 184 to access lambda function url."
   default     = N/A
   type        = string
 }
 
 variable "hosted_zone_id" {
-  description = "Previously created Hosted Zone ID within Route 53."
+  description = "pre-existing Hosted Zone ID within Route 53."
   default     = N/A
   type        = string
 }
