@@ -3,8 +3,8 @@
 <h6>Route 53 | Cloudfront | S3 | Certificate Manager | Lambda function | DynamoDB | Git | Github | Terraform | Python | Javascript </h6> 
 
 <h2>About The Project:</h2>
-A simple full-stack serverless resume built within AWS. Within an S3 bucket lies the website along with a profile counter tied to a Lambda function + Function URL that is called only from the resume's domain to DynamoDB and updates the respective table and DOM element. 
-On the Front End we have Route53 handling DNS, and CloudFront to take care of HTTPS and Edge Caching. A CI/CD pipeline has been setup using Github Actions to automatically update the website within S3, and invalidate Cloud Terraform has been used as IAC, and but few variables and adjustments are need to spin the entire architecture up.
+A simple full-stack serverless resume built within AWS. Within an S3 bucket lies the website along with a resume view counter tied to a Lambda Function + Function URL that can be called only from the resume's domain to DynamoDB and updates the respective table and DOM element. 
+On the Front End we have Route53 handling DNS, and CloudFront to take care of HTTPS and Edge Caching. A CI/CD pipeline has been setup using Github Actions to automatically update the website within S3, and invalidate CloudFront. Terraform has been used as IAC, and but few variables and adjustments are needed to spin the entire architecture up.
 
 
 ![{EA9C8906-ABED-40BA-91DC-E5AAB4A34FC6}](https://github.com/user-attachments/assets/e9b6656b-2091-415b-95e7-ac4c10c9fdcf)
@@ -20,7 +20,7 @@ On the Front End we have Route53 handling DNS, and CloudFront to take care of HT
  - `src/func.py`: Contains the visitor counter code which is deployed on lambda function.
 
 <h2>Variables:</h2>
-- The primary variables needed to get this architecture spun-up are:
+The primary variables needed to get this architecture spun-up are:
 
 ```
 variable "s3_bucket_name" {
@@ -47,7 +47,8 @@ variable "cert_arn" {
   type        = string
 }
 ```
-
-- You'll also need to place the respective Lambda Function URL within your Javascript code, once generated. outputs.tf should populate this for you on a terraform apply. Additionally, place you website into your S3 bucket once generated.
-- Ensure that your "default_root_object = "index.html" is set properly, as well as "handler = "func.lambda_handler"
+ 
+- You'll need to place the respective Lambda Function URL within your Javascript code, once generated from a terraform apply. outputs.tf should populate this for you upon the terraform apply.
+- Place you website into your S3 bucket once the bucket has been generated.
+- Ensure that your "default_root_object = "index.html" on line 28 is set properly, as well as "handler = "func.lambda_handler" on line 111 with respect to yourwebsite root and .py, as these are required to ensure your website can be pulled up, and Lambda runs. 
 - Configure AWS credentials via TF, or through your CLI.
